@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>网页版五子棋游戏</title>
+    <meta name="description" content="网页版五子棋游戏,欢迎试玩！" />
+    <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+
+<body>
+    <h1>网页版五子棋游戏</h1>
+    <div class="version-selector-container">
+        <label for="version">版本切换：</label>
+        <select id="version">
+            <option value="0">DOM 版</option>
+            <option value="1">Canvas 版</option>
+        </select>
+    </div>
+    <div id="chessboard_container" class="chessboard-container"></div>
+    <div id="chessboard_canvas_container" class="chessboard-canvas-container hidden">
+        <canvas id="chessboard_bg_canvas" width="458" height="458"></canvas>
+        <canvas id="chessboard_shadow_canvas" width="458" height="458"></canvas>
+        <canvas id="chessboard_canvas" width="458" height="458"></canvas>
+    </div>
+    <div id="msg" class="msg-container"></div>
+    <div class="toolbar-container">
+        <button id="replay">重玩</button>
+        <button id="reset">悔棋</button>
+        <button id="re_reset">撤销悔棋</button>
+    </div>
+    <script type="text/javascript" src="./index.js"></script>
+    <script>
+        var gobang = new Gobang();
+        gobang.init();
+
+        // 版本及其切换
+        var currentVersion = 0; // 初始是 DOM 版本
+        var versionSelector = document.getElementById('version');
+        var domContainer = document.getElementById('chessboard_container');
+        var canvasContainer = document.getElementById('chessboard_canvas_container');
+        versionSelector.onchange = function(ev) {
+            currentVersion = parseInt(this.value, 10);
+            // 显示棋盘，根据数据恢复棋盘状态
+            if (currentVersion) {
+                domContainer.style.display = 'none';
+                canvasContainer.style.display = 'block';
+            } else {
+                domContainer.style.display = 'block';
+                canvasContainer.style.display = 'none';
+            }
+        };
+
+        // if (localStorage.chessDatas && JSON.parse(localStorage.chessDatas).length > 1) {
+        //     console.log('localStorage.chessDatas', JSON.parse(localStorage.chessDatas));
+        //     gobang.restore(JSON.parse(localStorage.chessDatas));
+        // }
+
+        // 点击重置按钮
+        var replayButton = document.getElementById('replay');
+        replayButton.addEventListener('click', function(ev) {
+            gobang.clear();
+        }, false);
+
+        // 悔一步棋
+        var resetButton = document.getElementById('reset');
+        resetButton.addEventListener('click', function(ev) {
+            gobang.resetStep();
+        }, false);
+
+        // 撤销悔棋
+        var reResetButton = document.getElementById('re_reset');
+        reResetButton.addEventListener('click', function(ev) {
+            gobang.reResetStep();
+        }, false);
+    </script>
+</body>

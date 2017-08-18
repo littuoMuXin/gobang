@@ -1,0 +1,21 @@
+{
+    "name": "gobang",
+    "version": "0.1.0",
+    "description": "五子棋游戏",
+    "main": "index.js",
+    "watch": {
+        "less": "index.less",
+        "js": "index.js"
+    },
+    "scripts": {
+        "less": "lessc index.less > index.css",
+        "watch": "npm-watch"
+    },
+    "author": "Winni <xueqing.ma@hotmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "less": "^2.6.0",
+        "npm-watch": "^0.1.1"
+    }
+
+}

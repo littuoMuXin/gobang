@@ -1,0 +1,116 @@
+@base: #108ee9;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: @base;
+    font-size: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+div.version-selector-container {
+    font-size: 14px;
+    text-align: center;
+    > select {
+        padding: 5px;
+        height: 30px;
+        line-height: 30px;
+    }
+}
+
+div.msg-container {
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 16px;
+    width: 300px;
+    height: 50px;
+    border: 1px solid #d2eafb;
+    background-color: #ecf6fd;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, .65);
+    font-size: 20px;
+    text-align: center;
+    line-height: 50px;
+    opacity: 0.9;
+    &.show {
+        display: block;
+    }
+}
+
+div.chessboard-container {
+    width: 450px;
+    height: 450px;
+    padding: 4px;
+    margin: 20px auto;
+    background-image: url(./imgs/board.jpg);
+    background-size: cover;
+    > div.chess-grid {
+        float: left;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        &.black-chess {
+            width: 26px;
+            height: 26px;
+            margin: 2px;
+            background-color: #000;
+        }
+        &.white-chess {
+            width: 26px;
+            height: 26px;
+            margin: 2px;
+            background-color: #FFF;
+        }
+    }
+}
+
+div.chessboard-canvas-container {
+    position: relative;
+    width: 458px;
+    height: 458px;
+    margin: 20px auto;
+    cursor: pointer;
+    &.hidden {
+        display: none;
+    }
+    canvas {
+        position: absolute;
+    }
+}
+
+div.toolbar-container {
+    text-align: center;
+    margin: 50px auto;
+    > button {
+        background-color: @base;
+        border: 1px solid transparent;
+        border-color: @base;
+        outline: 0;
+        padding: 0 15px;
+        font-size: 12px;
+        border-radius: 4px;
+        height: 28px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            opacity: 0.8;
+        }
+        &.disabled {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    }
+}
