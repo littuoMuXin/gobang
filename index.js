@@ -134,6 +134,10 @@ Gobang.prototype.resetStep = function(target) {
     if (_this._chessDatas.length < 1) return;
     _this._status = 0; // 即使分出了胜负，悔棋后也回到了对战状态
     var lastStep = _this._chessDatas.pop();
+
+    // 修改棋盘数据
+    _this._chessBoardDatas[lastStep % _this._gridNum][parseInt(lastStep / _this._gridNum)] = undefined;
+
     _this._resetStepData.push(lastStep);
 
     _this._role = 1 - _this._role;
@@ -278,16 +282,12 @@ Gobang.prototype.restore = function(chessDatas) {
         if (_this._isWin(chessDatas[i])) {
             // 获胜
             _this._status = 1;
-            var msg = (_this.role ? '白' : '黑') + '棋胜';
+            var msg = _this._role ? _this._msgs.whiteWin : _this._msgs.blackWin;
             setTimeout(function() {
-                alert(msg);
+                _this._showMsg(msg, 5000);
             }, 0);
-
-            _this._role = 1 - _this._role;
-        } else {
-            // 继续下棋
-            _this._role = 1 - _this._role;
         }
+        _this._role = 1 - _this._role;
     }
 };
 
@@ -296,8 +296,9 @@ Gobang.prototype.restore = function(chessDatas) {
  */
 Gobang.prototype.clear = function() {
     var _this = this;
-    if (_this._chessDatas.length < 1) return;
     _this._status = 0;
+    _this._role = 0;
+    if (_this._chessDatas.length < 1) return;
 
     // 清除棋子
     _this._chessDatas.forEach(function(position) {
