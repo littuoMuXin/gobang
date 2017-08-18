@@ -51,7 +51,7 @@ div.chessboard-container > div.chess-grid {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
   cursor: pointer;
 }
 div.chessboard-container > div.chess-grid:hover {
