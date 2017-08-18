@@ -350,6 +350,14 @@ Gobang.prototype.init = function() {
     // Canvas
     var chessShodowCanvas = document.getElementById('chessboard_shadow_canvas');
     var chessShodowContext = chessShodowCanvas.getContext('2d');
+    document.body.addEventListener('mousemove', function(ev) {
+        var x = ev.offsetX;
+        var y = ev.offsetY;
+
+        if (ev.target.nodeName !== 'CANVAS') {
+            chessShodowCanvas.style.display = 'none';
+        }
+    }, false);
     _this._chessCanvas.addEventListener('mousemove', function(ev) {
         var xPos = ev.offsetX;
         var yPos = ev.offsetY;
@@ -358,6 +366,7 @@ Gobang.prototype.init = function() {
         var x = _this._padding + (i + 0.5) * _this._gridWidth;
         var y = _this._padding + (j + 0.5) * _this._gridWidth;
 
+        chessShodowCanvas.style.display = 'block';
         chessShodowCanvas.height = chessShodowCanvas.height;
 
         // 超出棋盘范围不要阴影效果
