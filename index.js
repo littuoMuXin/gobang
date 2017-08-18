@@ -123,7 +123,7 @@ Gobang.prototype._goStep = function(position) {
     _this._chessBoardDatas[(position % _this._gridNum)][parseInt((position / _this._gridNum), 10)] = _this._role;
     _this._chessDatas.push(position);
     // 存入 localstorage
-    // localStorage.chessDatas = JSON.stringify(_this._chessDatas);
+    localStorage && (localStorage.chessDatas = JSON.stringify(_this._chessDatas));
 
     // 绘制棋子
     _this._addChess(position);
@@ -277,7 +277,7 @@ Gobang.prototype.restore = function(chessDatas) {
     // 直接开始
     _this._status = 0;
     for (var i = 0; i < chessDatas.length; i++) {
-        _this._goStep(_this._chessDatas[i]);
+        _this._goStep(chessDatas[i]);
         if (_this._isWin(chessDatas[i])) {
             // 获胜
             _this._status = 1;
@@ -308,7 +308,7 @@ Gobang.prototype.clear = function() {
     });
 
     _this._chessDatas = [];
-    localStorage.chessDatas = '';
+    localStorage && (localStorage.chessDatas = '');
     this._resetStepData = [];
     _this._chessBoardDatas = _this._initChessBoardDatas();
     _this._showMsg(_this._msgs.reStart, 1000);
@@ -324,7 +324,9 @@ Gobang.prototype.init = function() {
     _this._drawChessBoard();
 
     // 游戏开始
-    _this._showMsg(_this._msgs.start, 1000);
+    setTimeout(function() {
+        _this._showMsg(_this._msgs.start, 1000);
+    }, 1000);
 
     // 点击棋盘下棋
     // DOM

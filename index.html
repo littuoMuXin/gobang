@@ -51,10 +51,9 @@
             }
         };
 
-        // if (localStorage.chessDatas && JSON.parse(localStorage.chessDatas).length > 1) {
-        //     console.log('localStorage.chessDatas', JSON.parse(localStorage.chessDatas));
-        //     gobang.restore(JSON.parse(localStorage.chessDatas));
-        // }
+        if (localStorage && localStorage.chessDatas && JSON.parse(localStorage.chessDatas).length > 1) {
+            gobang.restore(JSON.parse(localStorage.chessDatas));
+        }
 
         // 点击重置按钮
         var replayButton = document.getElementById('replay');
