@@ -9,6 +9,7 @@ function Gobang() {
     this._gridNum = 15; // 棋盘行列数
     this._padding = 4; // 棋盘内边距
     this._gridWidth = 30; // 棋盘格宽度
+    this._chessRadius = 13; // 棋子的半径
     this._chessBoardDatas = this._initChessBoardDatas();
     this._msgContainer = document.getElementById('msg');
     this._msgs = {
@@ -36,7 +37,6 @@ Gobang.prototype._initChessBoardDatas = function() {
     for (var i = 0; i < _this._gridNum; i++) {
         initDatas[i] = new Array(_this._gridNum);
     }
-    console.log(initDatas);
     return initDatas;
 };
 
@@ -63,15 +63,12 @@ Gobang.prototype._addChessInCanvas = function(position, role) {
     var x = _this._padding + ((position % _this._gridNum) + 0.5) * _this._gridWidth;
     var y = _this._padding + (parseInt((position / _this._gridNum), 10) + 0.5) * _this._gridWidth;
     _this._chessContext.beginPath();
-    _this._chessContext.arc(x, y, 12, 0, 2 * Math.PI);
+    _this._chessContext.arc(x, y, _this._chessRadius, 0, 2 * Math.PI);
     if (role) {
-        // _this._chessContext.strokeStyle = "#FFFFFF";
         _this._chessContext.fillStyle = "#FFFFFF";
     } else {
-        // _this._chessContext.strokeStyle = "#000000";
         _this._chessContext.fillStyle = "#000000";
     }
-    // _this._chessContext.stroke();
     _this._chessContext.fill();
     _this._chessContext.closePath();
 };
