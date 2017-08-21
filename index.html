@@ -29,47 +29,58 @@
         <button id="reset">悔棋</button>
         <button id="re_reset">撤销悔棋</button>
     </div>
-    <script type="text/javascript" src="./index.js"></script>
+    <script type="text/javascript" src="./notice.js"></script>
+    <script type="text/javascript" src="./domRenderer.js"></script>
+    <script type="text/javascript" src="./canvasRenderer.js"></script>
+    <script type="text/javascript" src="./controller.js"></script>
     <script>
+        var domRendererContainer = document.getElementById('chessboard_container');
+        var domRenderer = new DomRenderer(domRendererContainer);
+
+        var canvasRendererContainer = document.getElementById('chessboard_canvas_container');
+        var canvasRendererChessContainer = document.getElementById('chessboard_canvas');
+        var canvasRenderer = new CanvasRenderer(canvasRendererChessContainer);
+
         var gobang = new Gobang();
-        gobang.init();
+        gobang.init(domRenderer);
 
         // 版本及其切换
         var currentVersion = 0; // 初始是 DOM 版本
         var versionSelector = document.getElementById('version');
-        var domContainer = document.getElementById('chessboard_container');
-        var canvasContainer = document.getElementById('chessboard_canvas_container');
-        versionSelector.onchange = function(ev) {
+        versionSelector.onchange = function() {
             currentVersion = parseInt(this.value, 10);
             // 显示棋盘，根据数据恢复棋盘状态
             if (currentVersion) {
-                domContainer.style.display = 'none';
-                canvasContainer.style.display = 'block';
+                domRendererContainer.style.display = 'none';
+                canvasRendererContainer.style.display = 'block';
+                gobang.changeRenderer(canvasRenderer);
             } else {
-                domContainer.style.display = 'block';
-                canvasContainer.style.display = 'none';
+                domRendererContainer.style.display = 'block';
+                canvasRendererContainer.style.display = 'none';
+                gobang.changeRenderer(domRenderer);
             }
         };
 
+        // 如果 localStorage 中有数据则恢复
         if (localStorage && localStorage.chessDatas && JSON.parse(localStorage.chessDatas).length > 1) {
             gobang.restore(JSON.parse(localStorage.chessDatas));
         }
 
         // 点击重置按钮
         var replayButton = document.getElementById('replay');
-        replayButton.addEventListener('click', function(ev) {
+        replayButton.addEventListener('click', function() {
             gobang.clear();
         }, false);
 
         // 悔一步棋
         var resetButton = document.getElementById('reset');
-        resetButton.addEventListener('click', function(ev) {
+        resetButton.addEventListener('click', function() {
             gobang.resetStep();
         }, false);
 
         // 撤销悔棋
         var reResetButton = document.getElementById('re_reset');
-        reResetButton.addEventListener('click', function(ev) {
+        reResetButton.addEventListener('click', function() {
             gobang.reResetStep();
         }, false);
     </script>
