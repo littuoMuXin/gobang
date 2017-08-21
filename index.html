@@ -18,11 +18,7 @@
         </select>
     </div>
     <div id="chessboard_container" class="chessboard-container"></div>
-    <div id="chessboard_canvas_container" class="chessboard-canvas-container hidden">
-        <canvas id="chessboard_bg_canvas" width="458" height="458"></canvas>
-        <canvas id="chessboard_shadow_canvas" width="458" height="458"></canvas>
-        <canvas id="chessboard_canvas" width="458" height="458"></canvas>
-    </div>
+    <div id="chessboard_canvas_container" class="chessboard-canvas-container hidden"></div>
     <div id="msg" class="msg-container"></div>
     <div class="toolbar-container">
         <button id="replay">重玩</button>
@@ -38,8 +34,8 @@
         var domRenderer = new DomRenderer(domRendererContainer);
 
         var canvasRendererContainer = document.getElementById('chessboard_canvas_container');
-        var canvasRendererChessContainer = document.getElementById('chessboard_canvas');
-        var canvasRenderer = new CanvasRenderer(canvasRendererChessContainer);
+        // var canvasRendererChessContainer = document.getElementById('chessboard_canvas');
+        var canvasRenderer = new CanvasRenderer(canvasRendererContainer);
 
         var gobang = new Gobang();
         gobang.init(domRenderer);

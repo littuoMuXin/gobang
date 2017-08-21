@@ -39,12 +39,7 @@ div.msg-container.show {
   display: block;
 }
 div.chessboard-container {
-  width: 450px;
-  height: 450px;
-  padding: 4px;
   margin: 20px auto;
-  background-image: url(imgs/board.jpg);
-  background-size: cover;
 }
 div.chessboard-container > div.chess-grid {
   float: left;

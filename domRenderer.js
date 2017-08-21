@@ -3,6 +3,8 @@
  */
 
 function DomRenderer(container) {
+    this._chessBoardWidth = 450; // 棋盘宽度
+    this._chessBoardPadding = 4; // 棋盘内边距
     this._gridNum = 15; // 棋盘行列数
     this._gridDoms = []; // 存放棋盘 DOM
     this._chessboardContainer = container; // 容器
@@ -27,12 +29,17 @@ DomRenderer.prototype.bindEvents = function(controllerObj) {
     _this.eventsBinded = true;
 };
 
-
 /**
  * 渲染棋盘
  */
 DomRenderer.prototype.renderChessBoard = function() {
     var _this = this;
+
+    _this._chessboardContainer.style.width = _this._chessBoardWidth + 'px';
+    _this._chessboardContainer.style.height = _this._chessBoardWidth + 'px';
+    _this._chessboardContainer.style.padding = _this._chessBoardPadding + 'px';
+    _this._chessboardContainer.style.backgroundImage = 'url(./imgs/board.jpg)';
+    _this._chessboardContainer.style.backgroundSize = 'cover';
 
     var fragment = '';
     for (var i = 0; i < _this._gridNum * _this._gridNum; i++) {

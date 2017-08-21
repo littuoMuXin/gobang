@@ -3,15 +3,49 @@
  */
 
 function CanvasRenderer(container) {
+    this._chessBoardWidth = 450; // 棋盘宽度
+    this._chessBoardPadding = 4; // 棋盘内边距
     this._gridNum = 15; // 棋盘行列数
     this._padding = 4; // 棋盘内边距
     this._gridWidth = 30; // 棋盘格宽度
     this._chessRadius = 13; // 棋子的半径
-    this._container = container; // 容器
-    this._context = container.getContext('2d');
+    this._container = container; // 创建 canvas 的 DOM 容器
     this.chessBoardRendered = false; // 是否渲染了棋盘
     this.eventsBinded = false; // 是否绑定了事件
+    this._init();
 }
+
+/**
+ * 初始化操作，创建画布
+ */
+CanvasRenderer.prototype._init = function() {
+    var _this = this;
+
+    var width = _this._chessBoardWidth + _this._chessBoardPadding * 2;
+
+    // 创建绘制背景的画布
+    _this._bgCanvas = document.createElement('canvas');
+    _this._bgCanvas.setAttribute('width', width);
+    _this._bgCanvas.setAttribute('height', width);
+
+    // 创建绘制阴影的画布
+    _this._shadowCanvas = document.createElement('canvas');
+    _this._shadowCanvas.setAttribute('width', width);
+    _this._shadowCanvas.setAttribute('height', width);
+
+    // 创建绘制棋子的画布
+    _this._chessCanvas = document.createElement('canvas');
+    _this._chessCanvas.setAttribute('width', width);
+    _this._chessCanvas.setAttribute('height', width);
+
+    // 在容器中插入画布
+    _this._container.appendChild(_this._bgCanvas);
+    _this._container.appendChild(_this._shadowCanvas);
+    _this._container.appendChild(_this._chessCanvas);
+
+    // 棋子的绘图环境
+    _this._context = _this._chessCanvas.getContext('2d');
+};
 
 /**
  * 判断某个单元格是否在棋盘上
@@ -29,12 +63,11 @@ CanvasRenderer.prototype._inRange = function(x, y) {
 CanvasRenderer.prototype.bindEvents = function(controllerObj) {
     var _this = this;
 
-    var chessShodowCanvas = document.getElementById('chessboard_shadow_canvas');
-    var chessShodowContext = chessShodowCanvas.getContext('2d');
+    var chessShodowContext = _this._shadowCanvas.getContext('2d');
     // 鼠标移出画布时隐藏画阴影的画布
     document.body.addEventListener('mousemove', function(ev) {
         if (ev.target.nodeName !== 'CANVAS') {
-            chessShodowCanvas.style.display = 'none';
+            _this._shadowCanvas.style.display = 'none';
         }
     }, false);
     // 鼠标移出画布时隐藏画阴影的画布
@@ -47,9 +80,9 @@ CanvasRenderer.prototype.bindEvents = function(controllerObj) {
         var y = _this._padding + (j + 0.5) * _this._gridWidth;
 
         // 显示画阴影的画布
-        chessShodowCanvas.style.display = 'block';
+        _this._shadowCanvas.style.display = 'block';
         // 快速清除画布
-        chessShodowCanvas.height = chessShodowCanvas.height;
+        _this._shadowCanvas.height = _this._shadowCanvas.height;
 
         // 超出棋盘范围不要阴影效果
         if (!_this._inRange(i, j)) return;
@@ -71,7 +104,7 @@ CanvasRenderer.prototype.bindEvents = function(controllerObj) {
         var success = controllerObj.goStep(i, j, true);
         if (success) {
             // 清除阴影
-            chessShodowCanvas.height = chessShodowCanvas.height;
+            _this._shadowCanvas.height = _this._shadowCanvas.height;
         }
     }, false);
     _this.eventsBinded = true;
@@ -82,9 +115,9 @@ CanvasRenderer.prototype.bindEvents = function(controllerObj) {
  */
 CanvasRenderer.prototype.renderChessBoard = function() {
     var _this = this;
+
     // 绘制一张棋盘图片作为背景，该背景始终不变，所以放在一个专用图层里
-    var bgCanvas = document.getElementById('chessboard_bg_canvas');
-    var bgContext = bgCanvas.getContext('2d');
+    var bgContext = _this._bgCanvas.getContext('2d');
     bgContext.strokeStyle = 'none'; //边框颜色
     var bgImg = new Image();
     bgImg.src = './imgs/board.jpg';
@@ -125,7 +158,7 @@ CanvasRenderer.prototype.renderUndo = function(step, allSteps) {
     var _this = this;
 
     if (!step) return;
-    this._container.height = this._container.height; // 快速清除画布
+    _this._chessCanvas.height = _this._chessCanvas.height; // 快速清除画布
     if (allSteps.length < 1) return;
     // 重绘
     allSteps.forEach(function(p) {
@@ -137,5 +170,5 @@ CanvasRenderer.prototype.renderUndo = function(step, allSteps) {
  * 清除所有棋子
  */
 CanvasRenderer.prototype.renderClear = function() {
-    this._container.height = this._container.height; // 快速清除画布
+    this._chessCanvas.height = this._chessCanvas.height; // 快速清除画布
 };
