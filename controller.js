@@ -95,11 +95,13 @@ Gobang.prototype.resetStep = function() {
     _this._status = 0; // 即使分出了胜负，悔棋后也回到了对战状态
     var lastStep = _this._chessDatas.pop();
 
+    // 存入 localstorage
+    localStorage && (localStorage.chessDatas = JSON.stringify(_this._chessDatas));
     // 修改棋盘数据
     _this._chessBoardDatas[lastStep.x][lastStep.y] = undefined;
     // 存储悔棋数据
     _this._resetStepData.push(lastStep);
-    // 切换用户juese
+    // 切换用户角色
     _this._role = 1 - _this._role;
     // 移除棋子
     _this.renderer.renderUndo(lastStep, _this._chessDatas);

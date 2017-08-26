@@ -34,7 +34,6 @@
         var domRenderer = new DomRenderer(domRendererContainer);
 
         var canvasRendererContainer = document.getElementById('chessboard_canvas_container');
-        // var canvasRendererChessContainer = document.getElementById('chessboard_canvas');
         var canvasRenderer = new CanvasRenderer(canvasRendererContainer);
 
         var gobang = new Gobang();
@@ -58,7 +57,7 @@
         };
 
         // 如果 localStorage 中有数据则恢复
-        if (localStorage && localStorage.chessDatas && JSON.parse(localStorage.chessDatas).length > 1) {
+        if (localStorage && localStorage.chessDatas && JSON.parse(localStorage.chessDatas).length > 0) {
             gobang.restore(JSON.parse(localStorage.chessDatas));
         }
 
