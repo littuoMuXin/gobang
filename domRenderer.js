@@ -21,7 +21,9 @@ DomRenderer.prototype.bindEvents = function(controllerObj) {
 
     _this._chessboardContainer.addEventListener('click', function(ev) {
         var target = ev.target;
-        var position = target.getAttribute('attr-data') - 0;
+        var attrData = target.getAttribute('attr-data');
+        if (attrData === undefined || attrData === null) return;
+        var position = attrData - 0;
         var x = position % _this._gridNum;
         var y = parseInt(position / _this._gridNum, 10);
         controllerObj.goStep(x, y, true);
