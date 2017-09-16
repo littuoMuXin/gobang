@@ -2,6 +2,10 @@
  * 负责 Canvas 版本的五子棋的渲染工作
  */
 
+/**
+ * Canvas 版本五子棋渲染器构造函数
+ * @param {Object} container 渲染所在的 DOM 容器
+ */
 function CanvasRenderer(container) {
     this._chessBoardWidth = 450; // 棋盘宽度
     this._chessBoardPadding = 4; // 棋盘内边距
@@ -49,8 +53,9 @@ CanvasRenderer.prototype._init = function() {
 
 /**
  * 判断某个单元格是否在棋盘上
- * @param x 水平坐标
- * @param y 垂直坐标
+ * @param {Number} x 水平坐标
+ * @param {Number} y 垂直坐标
+ * @returns {Boolean} 指定坐标是否在棋盘范围内
  */
 CanvasRenderer.prototype._inRange = function(x, y) {
     return x >= 0 && x < this._gridNum && y >= 0 && y < this._gridNum;
@@ -58,7 +63,7 @@ CanvasRenderer.prototype._inRange = function(x, y) {
 
 /**
  * 绑定事件
- * @param controllerObj 控制器对象
+ * @param {Object} controllerObj 控制器对象
  */
 CanvasRenderer.prototype.bindEvents = function(controllerObj) {
     var _this = this;
@@ -129,7 +134,7 @@ CanvasRenderer.prototype.renderChessBoard = function() {
 
 /**
  * 渲染一步棋子
- * @param step 棋的位置
+ * @param {Object} step 棋的位置
  */
 CanvasRenderer.prototype.renderStep = function(step) {
     var _this = this;
@@ -151,8 +156,8 @@ CanvasRenderer.prototype.renderStep = function(step) {
 
 /**
  * 悔一步棋子
- * @param step     当前这一步棋的位置
- * @param allSteps 剩下的所有棋的位置
+ * @param {Object} step 当前这一步棋的位置
+ * @param {Array} allSteps 剩下的所有棋的位置
  */
 CanvasRenderer.prototype.renderUndo = function(step, allSteps) {
     var _this = this;

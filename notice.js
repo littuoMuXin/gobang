@@ -6,8 +6,8 @@ var notice = {};
 notice.container = document.getElementById('msg');
 /**
  * 展示通知消息
- * @param msg      消息文本
- * @param duration 消息显示的时长
+ * @param {String} msg 消息文本
+ * @param {Number} duration 消息显示的时长
  */
 notice.showMsg = function(msg, duration) {
     var _this = this;

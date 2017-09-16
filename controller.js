@@ -22,6 +22,7 @@ function Gobang() {
 
 /**
  * 初始化棋盘数据
+ * @returns {Array} 初始棋盘数据
  */
 Gobang.prototype._initChessBoardDatas = function() {
     var _this = this;
@@ -34,8 +35,9 @@ Gobang.prototype._initChessBoardDatas = function() {
 
 /**
  * 判断一个位置是否有棋子
- * @param x 水平坐标
- * @param y 垂直坐标
+ * @param {Number} x 水平坐标
+ * @param {Number} y 垂直坐标
+ * @returns {Boolean} 初始棋盘数据
  */
 Gobang.prototype._hasChess = function(x, y) {
     var _this = this;
@@ -48,10 +50,10 @@ Gobang.prototype._hasChess = function(x, y) {
 
 /**
  * 下一步棋
- * @param x      水平坐标
- * @param y      垂直坐标
- * @param normal 正常下棋，不是撤销悔棋之类
- * @return       是否成功下棋
+ * @param {Number} x 水平坐标
+ * @param {Number} y 垂直坐标
+ * @param {Boolean} normal 正常下棋，不是撤销悔棋之类
+ * @returns {Boolean} 是否成功下棋
  */
 Gobang.prototype.goStep = function(x, y, normal) {
     var _this = this;
@@ -122,8 +124,9 @@ Gobang.prototype.reResetStep = function() {
 
 /**
  * 判断某个单元格是否在棋盘上
- * @param x 水平坐标
- * @param y 垂直坐标
+ * @param {Number} x 水平坐标
+ * @param {Number} y 垂直坐标
+ * @returns {Boolean} 指定坐标是否在棋盘范围内
  */
 Gobang.prototype._inRange = function(x, y) {
     return x >= 0 && x < this._gridNum && y >= 0 && y < this._gridNum;
@@ -131,7 +134,11 @@ Gobang.prototype._inRange = function(x, y) {
 
 /**
  * 判断在某个方向上有多少个同样的棋子
- * @return
+ * @param {Number} xPos 水平坐标
+ * @param {Number} yPos 垂直坐标
+ * @param {Number} deltaX 水平移动方向
+ * @param {Number} deltaY 垂直移动方向
+ * @returns {Number} 与给定位置棋子朝给定位置上计算得到的相同的棋子数量
  */
 Gobang.prototype._getCount = function(xPos, yPos, deltaX, deltaY) {
     var _this = this;
@@ -148,10 +155,10 @@ Gobang.prototype._getCount = function(xPos, yPos, deltaX, deltaY) {
 
 /**
  * 判断在某个方向上是否获胜
- * @param x 水平坐标
- * @param y 垂直坐标
- * @param direction 方向
- * @return
+ * @param {Number} x 水平坐标
+ * @param {Number} y 垂直坐标
+ * @param {Object} direction 方向
+ * @returns {Boolean} 在某个方向上是否获胜
  */
 Gobang.prototype._isWinInDirection = function(x, y, direction) {
     var _this = this;
@@ -163,8 +170,9 @@ Gobang.prototype._isWinInDirection = function(x, y, direction) {
 
 /**
  * 判断是否获胜
- * @param x 水平坐标
- * @param y 垂直坐标
+ * @param {Number} x 水平坐标
+ * @param {Number} y 垂直坐标
+ * @returns {Boolean} 是否获胜
  */
 Gobang.prototype._isWin = function(x, y) {
     var _this = this;
@@ -193,7 +201,7 @@ Gobang.prototype._isWin = function(x, y) {
 
 /**
  * 根据下棋数据恢复棋局
- * @param chessDatas 下棋数据数组
+ * @param {Array} chessDatas 下棋数据数组
  */
 Gobang.prototype.restore = function(chessDatas) {
     var _this = this;
@@ -226,7 +234,7 @@ Gobang.prototype.clear = function() {
 
 /**
  * 切换渲染器
- * @param renderer 渲染器对象
+ * @param {Object} renderer 渲染器对象
  */
 Gobang.prototype.changeRenderer = function(renderer) {
     var _this = this;
@@ -246,7 +254,7 @@ Gobang.prototype.changeRenderer = function(renderer) {
 
 /**
  * 初始化
- * @param renderer 渲染器
+ * @param {Object} renderer 渲染器
  */
 Gobang.prototype.init = function(renderer) {
     var _this = this;

@@ -2,6 +2,10 @@
  * 负责 DOM 版本的五子棋的渲染工作
  */
 
+/**
+ * Dom 版本五子棋渲染器构造函数
+ * @param {Object} container 渲染所在的 DOM 容器
+ */
 function DomRenderer(container) {
     this._chessBoardWidth = 450; // 棋盘宽度
     this._chessBoardPadding = 4; // 棋盘内边距
@@ -14,7 +18,7 @@ function DomRenderer(container) {
 
 /**
  * 绑定事件
- * @param controllerObj 控制器对象
+ * @param {Object} controllerObj 控制器对象
  */
 DomRenderer.prototype.bindEvents = function(controllerObj) {
     var _this = this;
@@ -54,7 +58,7 @@ DomRenderer.prototype.renderChessBoard = function() {
 
 /**
  * 渲染一步棋子
- * @param step 棋的位置
+ * @param {Object} step 棋的位置
  */
 DomRenderer.prototype.renderStep = function(step) {
     var _this = this;
@@ -68,8 +72,8 @@ DomRenderer.prototype.renderStep = function(step) {
 
 /**
  * 悔一步棋子
- * @param step     棋的位置
- * @param allSteps 剩下的所有棋的位置
+ * @param {Object} step 棋的位置
+ * @param {Array} allSteps 剩下的所有棋的位置
  */
 DomRenderer.prototype.renderUndo = function(step) {
     var _this = this;
