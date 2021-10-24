@@ -83,12 +83,14 @@
         reResetButton.addEventListener('click', function() {
             gobang.reResetStep();
         }, false);
+
+        // 加载页眉页脚
         var q;
         try {
             q = window.location.search;
         } catch (ex) { }
         pgCtrl.addMenu({ id: "winni", name: "Winni Ma", url: "https://littuomuxin.github.io" });
-        pgCtrl.init(q === "12dlabs" || q === "12d" ? "games" : "winni");
+        pgCtrl.init(q === "?12dlabs" || q === "?12d" ? "games" : "winni");
     </script>
 </body>
 
