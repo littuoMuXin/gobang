@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>网页版五子棋游戏</title>
-    <meta name="description" content="网页版五子棋游戏,欢迎试玩！" />
+    <meta name="description" content="网页版五子棋游戏，欢迎免费畅玩！" />
     <script type="text/javascript" src="https://12dlabs.github.io/static/scripts/layout.js" ></script>
     <link rel="stylesheet" type="text/css" href="./index.css">
     <link href="https://12dlabs.github.io/css/layout.css" rel="stylesheet" />
@@ -83,7 +83,13 @@
         reResetButton.addEventListener('click', function() {
             gobang.reResetStep();
         }, false);
-        pgCtrl.init("games");
+        var q;
+        try {
+            q = window.location.search;
+        } catch (ex) { }
         pgCtrl.addMenu({ id: "winni", name: "Winni Ma", url: "https://littuomuxin.github.io" });
+        pgCtrl.init(q === "12dlabs" || q === "12d" ? "games" : "winni");
     </script>
 </body>
+
+</html>
