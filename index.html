@@ -3,33 +3,38 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>网页版五子棋游戏</title>
     <meta name="description" content="网页版五子棋游戏,欢迎试玩！" />
+    <script type="text/javascript" src="https://12dlabs.github.io/static/scripts/layout.js" ></script>
     <link rel="stylesheet" type="text/css" href="./index.css">
+    <link href="https://12dlabs.github.io/css/layout.css" rel="stylesheet" />
 </head>
 
 <body>
-    <h1>网页版五子棋游戏</h1>
-    <div class="version-selector-container">
-        <label for="version">版本切换：</label>
-        <select id="version">
-            <option value="0">DOM 版</option>
-            <option value="1">Canvas 版</option>
-        </select>
-    </div>
-    <div id="chessboard_container" class="chessboard-container"></div>
-    <div id="chessboard_canvas_container" class="chessboard-canvas-container hidden"></div>
-    <div id="msg" class="msg-container"></div>
-    <div class="toolbar-container">
-        <button id="replay">重玩</button>
-        <button id="reset">悔棋</button>
-        <button id="re_reset">撤销悔棋</button>
-    </div>
+    <section>
+        <h1>网页版五子棋游戏</h1>
+        <div class="version-selector-container">
+            <label for="version">版本切换：</label>
+            <select id="version">
+                <option value="0">DOM 版</option>
+                <option value="1">Canvas 版</option>
+            </select>
+        </div>
+        <div id="chessboard_container" class="chessboard-container"></div>
+        <div id="chessboard_canvas_container" class="chessboard-canvas-container hidden"></div>
+        <div id="msg" class="msg-container"></div>
+        <div class="toolbar-container">
+            <button id="replay">重玩</button>
+            <button id="reset">悔棋</button>
+            <button id="re_reset">撤销悔棋</button>
+        </div>
+    </section>
     <script type="text/javascript" src="./notice.js"></script>
     <script type="text/javascript" src="./domRenderer.js"></script>
     <script type="text/javascript" src="./canvasRenderer.js"></script>
     <script type="text/javascript" src="./controller.js"></script>
-    <script>
+    <script type="text/javascript">
         var domRendererContainer = document.getElementById('chessboard_container');
         var domRenderer = new DomRenderer(domRendererContainer);
 
@@ -78,5 +83,7 @@
         reResetButton.addEventListener('click', function() {
             gobang.reResetStep();
         }, false);
+        pgCtrl.init("games");
+        pgCtrl.addMenu({ id: "winni", name: "Winni Ma", url: "https://littuomuxin.github.io" });
     </script>
 </body>
