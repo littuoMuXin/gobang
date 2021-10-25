@@ -21,8 +21,12 @@
                 <option value="1">Canvas 版</option>
             </select>
         </div>
+    </section>
+    <section class="chessboard-container">
         <div id="chessboard_container" class="chessboard-container"></div>
         <div id="chessboard_canvas_container" class="chessboard-canvas-container hidden"></div>
+    </section>
+    <section>
         <div id="msg" class="msg-container"></div>
         <div class="toolbar-container">
             <button id="replay">重玩</button>
@@ -90,7 +94,7 @@
             q = window.location.search;
         } catch (ex) { }
         pgCtrl.addMenu({ id: "winni", name: "Winni Ma", url: "https://littuomuxin.github.io" });
-        pgCtrl.init(q === "?12dlabs" || q === "?12d" ? "games" : "winni");
+        if (q !== "?clear") pgCtrl.init(q === "?12dlabs" || q === "?12d" ? "games" : "winni");
     </script>
 </body>
 

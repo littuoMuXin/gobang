@@ -16,9 +16,17 @@ div.version-selector-container {
     font-size: 14px;
     text-align: center;
     > select {
+        color: #DDD;
         padding: 5px;
         height: 30px;
         line-height: 30px;
+        background-color: #222;
+        border: 1px solid #333;
+        transition: 0.4s;
+    }
+    > select:hover {
+        background-color: #333;
+        border-color: #666;
     }
 }
 
@@ -42,6 +50,10 @@ div.msg-container {
     &.show {
         display: block;
     }
+}
+
+section.chessboard-container {
+    overflow-x: overlay;
 }
 
 div.chessboard-container {
@@ -87,16 +99,17 @@ div.chessboard-canvas-container {
 
 div.toolbar-container {
     text-align: center;
-    margin: 50px auto;
+    margin: 20px auto 60px auto;
+    user-select: none;
     > button {
         background-color: @base;
         border: 1px solid transparent;
         border-color: @base;
         outline: 0;
         padding: 0 15px;
-        font-size: 12px;
+        font-size: 14px;
         border-radius: 4px;
-        height: 28px;
+        height: 30px;
         color: #fff;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
@@ -105,7 +118,6 @@ div.toolbar-container {
         }
         &.disabled {
             opacity: 0.5;
-            cursor: pointer;
         }
     }
 }
